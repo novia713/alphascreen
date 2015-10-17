@@ -1,0 +1,10 @@
+{
+  "name" : "Alphascreen",
+  "description": "An alphabetical homescreen",
+  "developer": { "name": "leandro713" },
+  "package_path": "alphascreen.zip",
+  "icons": {
+    "128":   "style/icons/alpha.png",
+    "30":    "style/icons/alpha30.png"
+  }
+}

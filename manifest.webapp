@@ -1,28 +1,18 @@
 {
+  "manifest_version": 1,
+  "version": "1.0",
   "name": "Alphascreen",
-  "description": "An alphabetical homescreen for FirefoxOS",
-  "launch_path": "/index.html",
-  "type": "certified",
-  "role": "homescreen",
-  "developer": {
-    "name": "leandro713",
-    "url": "https://github.com/novia713/"
-  },
-  "permissions": {
-    "webapps-manage":{}
-  },
-  "locales": {
-    "en-US": {
-      "name": "Alphascreen",
-      "description": "An alphabetical homescreen for FirefoxOS"
-    }
-  },
-  "default_locale": "en-US",
-  "icons": {
-    "128": "/style/icons/alpha.png",
-    "30": "/style/icons/alpha30.png"
-  },
-  "orientation": "portrait-primary",
-  "activities": {},
-  "messages": []
+  "description": "An alphabetical homescreen",
+  "author": "leandro713",
+  "launch_path":"/index.html",
+  "content_scripts": [{
+    "matches": "app://*/*",
+    "css": ["/style/css/apps.css" , "/style/css/scrolling.css", "bower_components/gaia-fonts/style.css"],
+    "js": ["/bower_components/firefoxos-mozapps/dist/build.standard.js", "js/apps.js"]
+  }],
+  "icons":
+  {
+    "128":   "style/icons/alpha.png",
+    "30":    "style/icons/alpha30.png"
+  }
 }
