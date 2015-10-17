@@ -1,0 +1,30 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+#apps {
+    background: -moz-linear-gradient(-45deg, violet,navy);
+}
+
+.appname {
+    color:whitesmoke;
+    font-size:14px;
+    position: relative;
+    overflow:hidden;
+    z-index: 1;
+}
+
+.tile {
+    display: inline-block;
+    width: 30%;
+    height: 120px;
+    margin: 1.5%;
+    background: no-repeat center;
+}
+
+.letter {
+    color: white;
+    font-size:36px;
+    margin: 5%;
+}
