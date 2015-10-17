@@ -4,8 +4,6 @@
  * GPL v3 license
  * v. 20151017
  */
-
-
 (function() {
     // Apps container
     var parent = document.getElementById('apps');
@@ -17,7 +15,7 @@
     /**
      * Letters section generator
      */
-    Array.apply(0, Array(26)).map(function(x, y){
+    Array.apply(0, Array(26)).map(function(x, y) {
         var l = String.fromCharCode(y + 65);
         var letter = document.createElement('div');
         letter.className = 'letter';
@@ -32,7 +30,7 @@
      * Renders the icon to the container.
      */
     function render(icon) {
-        var name =icon.app.manifest.name;
+        var name = icon.app.manifest.name;
         var firstchar = name.charAt(0);
         var tile = document.createElement('div');
 
@@ -64,12 +62,12 @@
             var scroll_height = document.getElementById('scrollbar').scrollHeight;
 
             document.getElementById('scrollbar').style.marginTop = (scroll_height + e.clientY) + 'px';
-
-            console.log ("clientY: "+ e.clientY);
-            console.log ("scroll_height: "+ scroll_height);
-            console.log( document.getElementById('scrollbar').style.marginTop );
+/*
+            console.log("clientY: " + e.clientY);
+            console.log("scroll_height: " + scroll_height);
+            console.log(document.getElementById('scrollbar').style.marginTop);
             console.log(e);
-
+*/
         }
     });
 
