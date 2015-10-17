@@ -5,6 +5,7 @@
   "description": "An alphabetical homescreen",
   "author": "leandro713",
   "launch_path":"/index.html",
+  "type":"certified",
   "content_scripts": [{
     "matches": "app://*/*",
     "css": ["/style/css/apps.css" , "/style/css/scrolling.css", "bower_components/gaia-fonts/style.css"],
