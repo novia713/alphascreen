@@ -22,6 +22,9 @@
         letter.id = l;
         letter.innerHTML = l;
         letter.setAttribute("name", l);
+        // by default all letters are invisible,
+        // we make them visible if have icons afterwards
+        letter.style.display = "none";
         parent.appendChild(letter);
     });
 
@@ -39,6 +42,7 @@
         //FIXME
         //tile.innerHTML = "<center><b class='appname'>" + name + "</b></center>";
         document.getElementById(firstchar).appendChild(tile);
+        document.getElementById(firstchar).style.display = "block"
         iconMap.set(tile, icon);
     }
 
