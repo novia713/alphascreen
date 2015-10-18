@@ -63,10 +63,12 @@
         if (i) i.launch();
         else { //scrollbar
 
+
+/*
             var scroll_height = document.getElementById('scrollbar').scrollHeight;
 
             document.getElementById('scrollbar').style.marginTop = (scroll_height + e.clientY) + 'px';
-/*
+
             console.log("clientY: " + e.clientY);
             console.log("scroll_height: " + scroll_height);
             console.log(document.getElementById('scrollbar').style.marginTop);

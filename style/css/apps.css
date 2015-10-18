@@ -1,10 +1,13 @@
 * {
     padding: 0px;
     margin: 0px;
+    margin-top:0%;
+    margin-bottom: 10%
 }
 
 #apps {
     background: -moz-linear-gradient(-45deg, violet,navy);
+    margin-top: -5%;
 }
 
 .appname {
@@ -18,7 +21,7 @@
 .tile {
     display: inline-block;
     width: 30%;
-    height: 30px;
+    height: 40px;
     background: no-repeat center;
 }
 
@@ -27,4 +30,11 @@
     font-size:40px;
     margin: 5%;
     vertical-align: middle
+}
+
+#scrollbar {
+    display: none;
+    margin-top:10%;
+    position:sticky;
+    float: right;
 }
