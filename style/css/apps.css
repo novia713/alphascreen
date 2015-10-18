@@ -2,7 +2,6 @@
     padding: 0px;
     margin: 0px;
     margin-top:0%;
-    margin-bottom: 10%
 }
 
 #apps {
@@ -21,7 +20,7 @@
 .tile {
     display: inline-block;
     width: 30%;
-    height: 40px;
+    height: 128px;
     background: no-repeat center;
 }
 
