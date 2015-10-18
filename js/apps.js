@@ -20,7 +20,7 @@
         var letter = document.createElement('div');
         letter.className = 'letter';
         letter.id = l;
-        letter.innerHTML = l;
+        letter.innerHTML = "<div>" +l + "</div>";
         letter.setAttribute("name", l);
         // by default all letters are invisible,
         // we make them visible if have icons afterwards
