@@ -17,7 +17,7 @@ body {margin: 0;}
 
 .tile {
     display: inline-block;
-    width: 30%;
+    width: 128px;
     height: 128px;
     background: no-repeat center;
 }

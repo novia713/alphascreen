@@ -38,7 +38,7 @@
         var tile = document.createElement('div');
 
         tile.className = 'tile';
-        tile.style.background = 'url(' + icon.icon + ') center/40% no-repeat';
+        tile.style.background = 'url(' + icon.icon + ') center/65% no-repeat';
         //FIXME
         //tile.innerHTML = "<center><b class='appname'>" + name + "</b></center>";
         document.getElementById(firstchar).appendChild(tile);
