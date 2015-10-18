@@ -18,13 +18,13 @@
 .tile {
     display: inline-block;
     width: 30%;
-    height: 120px;
-    margin: 1.5%;
+    height: 30px;
     background: no-repeat center;
 }
 
 .letter {
     color: white;
-    font-size:36px;
+    font-size:40px;
     margin: 5%;
+    vertical-align: middle
 }
