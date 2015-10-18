@@ -1,12 +1,10 @@
-* {
-    padding: 0px;
-    margin: 0px;
-    margin-top:0%;
-}
+html, body { height: 100%; }
+
+body {margin: 0;}
 
 #apps {
     background: -moz-linear-gradient(-45deg, violet,navy);
-    margin-top: -5%;
+    overflow-y:scroll;
 }
 
 .appname {
