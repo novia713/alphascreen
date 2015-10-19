@@ -8,6 +8,8 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="style/css/apps.css">
     <link rel="stylesheet" href="style/css/scrolling.css">
+    <link href="/style/css/action_menu.css" rel="stylesheet" type="text/css">
+    <link href="/style/css/switches.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="bower_components/gaia-fonts/style.css"></link>
     <script defer src="bower_components/firefoxos-mozapps/dist/build.standard.js"></script>
     <!-- https://libraries.io/npm/fxos-lib-mozapps -->
@@ -15,7 +17,9 @@
 </head>
 
 <body>
+
     <div id="apps">
+
 
 
 
@@ -82,6 +86,18 @@
 -->
 
     </div>
+
+
+    <form role="dialog" data-type="action" id="menu_settings">
+
+      <menu>
+        <button id="btn_config__show_empty_letters" type="button">Show empty letters</button>
+        <button id="btn_config__hide_empty_letters" type="button">Hide empty letters</button>
+        <button id="btn_config__icons_2_columns" type="button">Icons in 2 columns</button>
+        <button id="btn_config__icons_3_columns" type="button">Icons in 3 columns</button>
+        <button disabled type="button">Options</button>
+      </menu>
+    </form>
 </body>
 
 </html>

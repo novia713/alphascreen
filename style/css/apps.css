@@ -17,7 +17,6 @@ body {margin: 0;}
 
 .tile {
     display: inline-block;
-    width: 128px;
     height: 128px;
     background: no-repeat center;
 }
@@ -30,8 +29,15 @@ body {margin: 0;}
 }
 
 #scrollbar {
-    display: none;
     margin-top:10%;
     position:sticky;
     float: right;
+}
+
+#menu_settings {
+    display:none;
+}
+
+#settings {
+    float:right;font-size:22px;margin-right:5%; margin-top:4%;
 }
