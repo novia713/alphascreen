@@ -1,5 +1,6 @@
 # :ab: alphascreen
 Alphascreen is an alphabetic homescreen for FirefoxOS
+*CAUTION: this is very experimental*
 
 
 # Installation
@@ -9,7 +10,7 @@ Alphascreen is an alphabetic homescreen for FirefoxOS
     
 # Branches
  - branch `master`is a traditional homescreen, is able to be flashed via WebIde ( certified package :/ )
- - branch `add-on` is a firefoxos add-on
+ - branch `add-on` is a firefoxos add-on (it doesn't work yet)
     
 # TO-DO
  - install / uninstall
