@@ -26,24 +26,10 @@
     /* END CONFIG */
 
 
-
-
-    var start = function() {
-        console.log(x);
-        parent.innerHTML = "";
-
-        var skull = document.createElement('span');
-        skull.id = "settings";
-        skull.innerHTML = "☠";
-        parent.appendChild(skull);
-
-
-        app_status("block", "none");
         /**
          * Letters section generator
          */
-        Array.apply(0, Array(26)).map(function(x, y) {
-            var l = String.fromCharCode(y + 65);
+        var print_letter = function(l) {
             var letter = document.createElement('div');
             letter.className = 'letter';
             letter.id = l;
@@ -53,13 +39,33 @@
                 letter.style.display = "none";
             }
             parent.appendChild(letter);
-        });
+        }
+
+    var start = function() {
+
+        parent.innerHTML = "";
+
+
+        var skull = document.createElement('span');
+        skull.id = "settings";
+        skull.innerHTML = "☠";
+        parent.appendChild(skull);
+
+        for (z=65; z < 91; z++) {
+            var l = String.fromCharCode(z);
+            print_letter(l);
+        }
+
+
+
 
 
         /**
          * Renders the icon to the container.
          */
         function render(icon) {
+
+
 
             var name = icon.app.manifest.name;
             var wordname = name.split(" ");
@@ -105,6 +111,10 @@
             document.getElementById('btn_config__icons_2_columns').disabled = false;
             document.getElementById('btn_config__icons_3_columns').disabled = true;
         }
+
+        // end options buttons
+
+        app_status("block", "none");
     }
 
     var app_status = function(state_apps, state_settings){
@@ -119,7 +129,7 @@
         var i = iconMap.get(e.target);
         if (i) i.launch();
         else {
-            console.log(e.target.id);
+            //console.log(e.target.id);
             //open settings
             if (e.target.id == "settings") {
                 app_status("none","block");
