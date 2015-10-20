@@ -38,5 +38,8 @@ body {margin: 0;}
 }
 
 #settings {
-    float:right;font-size:22px;margin-right:5%; margin-top:4%;
+    float:right;
+    font-size:29px;
+    margin-right:-10%;
+    margin-top:5%;
 }
