@@ -21,9 +21,10 @@ requirejs.config({
 
 require(["Zepto", 'underscore'], function(Zepto, _) {
 
-    // Apps container
+    // basic vars
     var parent = $('#apps');
     var settings = $('#menu_settings');
+    const LONG_PRESS_TIMEOUT = 600;
     var iconMap = new WeakMap();
 
     /* CONFIG */
@@ -81,7 +82,7 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
 
         if (_.isEmpty($('.'+ 'icon_' + wordname[0])))  $('#' + firstchar).append(tile);
         if (config.empty_letters) {
-            $('#' + firstchar).show();
+            $('#' + firstchar).show(); //FIXME zepto show() is very slow :(
         }
         iconMap.set(tile, icon);
     }
@@ -92,11 +93,6 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
             $('.tile').remove();
             $('.letter').remove();
             $('#settings').remove();
-
-            var skull = document.createElement('span');
-            skull.id = "settings";
-            skull.innerHTML = " ☠ ";
-            parent.append(skull);
 
             for (z = 65; z < 91; z++) {
                 var l = String.fromCharCode(z);
@@ -149,9 +145,9 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
         else {
             //console.log(e.explicitOriginalTarget.data);
 
-            //open settings
-            if (e.target.id == "settings") {
-                app_status("none", "block");
+
+            if (e.target.id == "btn_config__cancel") {
+                app_status("block", "none");
             }
 
             if (e.target.id == "btn_config__hide_empty_letters") {
@@ -184,7 +180,12 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
 
             }
         }
-    });
+    }); //end window event 'click'
+
+    //settings longpress event
+    window.addEventListener('contextmenu', function(){
+        app_status("none", "block");
+    }, true); //end settings event 'longpress'
 
 
     start();
