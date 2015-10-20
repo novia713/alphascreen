@@ -95,7 +95,7 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
 
             var skull = document.createElement('span');
             skull.id = "settings";
-            skull.innerHTML = "☠";
+            skull.innerHTML = " ☠ ";
             parent.append(skull);
 
             for (z = 65; z < 91; z++) {
