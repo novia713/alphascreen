@@ -26,7 +26,7 @@ body {margin: 0;}
     font-size:40px;
     margin: 5%;
     vertical-align: middle;
-    text-shadow: 1px 1px 1px #def;
+    text-shadow: 1px 1px 1px #000;
 }
 
 #scrollbar {

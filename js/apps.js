@@ -24,12 +24,11 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
     // basic vars
     var parent = $('#apps');
     var settings = $('#menu_settings');
-    const LONG_PRESS_TIMEOUT = 600;
     var iconMap = new WeakMap();
 
     /* CONFIG */
 
-
+    var bg = true;
     var x = 2; //default icon columns key value
     var config = {};
 
@@ -110,6 +109,15 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
 
 
             //options buttons
+            if (bg == true) {
+                document.getElementById('btn_config__bg_transparent').disabled = false;
+                document.getElementById('btn_config__bg_colored').disabled = true;
+            }
+            if (bg == false) {
+                document.getElementById('btn_config__bg_transparent').disabled = true;
+                document.getElementById('btn_config__bg_colored').disabled = false;
+            }
+
             if (config.empty_letters == true) {
                 document.getElementById('btn_config__hide_empty_letters').disabled = true;
                 document.getElementById('btn_config__show_empty_letters').disabled = false;
@@ -152,6 +160,20 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
                 app_status("block", "none");
             }
 
+            // background
+            if (e.target.id == "btn_config__bg_transparent") {
+                parent.css('background','none');
+                bg = false;
+                start();
+            }
+
+            if (e.target.id == "btn_config__bg_colored") {
+                parent.css('background','-moz-linear-gradient(-45deg, violet,navy)');
+                bg = true;
+                start();
+            }// end background
+
+
             if (e.target.id == "btn_config__hide_empty_letters") {
                 config.empty_letters = true;
                 start();
@@ -191,4 +213,5 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
 
 
     start();
+
 });
