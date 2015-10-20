@@ -210,6 +210,12 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
 
     //settings longpress event
     window.addEventListener('contextmenu', function(){
+        //TODO: hide/show disabled buttons
+        _.map($('button'), function(b){
+            if (b.disabled) b.style.display="none";
+            else b.style.display="block";
+        });
+
         app_status("none", "block");
     }, true);
     //end settings event 'longpress'
