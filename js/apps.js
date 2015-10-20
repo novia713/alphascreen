@@ -147,7 +147,8 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
         var i = iconMap.get(e.target);
         if (i) i.launch();
         else {
-            console.log(e.target.id);
+            //console.log(e.explicitOriginalTarget.data);
+
             //open settings
             if (e.target.id == "settings") {
                 app_status("none", "block");
@@ -172,17 +173,16 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
                 x = 3;
                 start();
             }
-            /*
-             *          //scrollbar
-                        var scroll_height = document.getElementById('scrollbar').scrollHeight;
 
-                        document.getElementById('scrollbar').style.marginTop = (scroll_height + e.clientY) + 'px';
+            // scrollbar
+            if (undefined != e.explicitOriginalTarget.data) {
+                if ( $('#' +e.explicitOriginalTarget.data).offset().top ) {
+                    var letter_offset = $('#' +e.explicitOriginalTarget.data).offset().top;
 
-                        console.log("clientY: " + e.clientY);
-                        console.log("scroll_height: " + scroll_height);
-                        console.log(document.getElementById('scrollbar').style.marginTop);
-                        console.log(e);
-            */
+                    $('#scrollbar').css('marginTop', letter_offset);
+                }
+
+            }
         }
     });
 
