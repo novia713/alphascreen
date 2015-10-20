@@ -25,7 +25,8 @@ body {margin: 0;}
     color: white;
     font-size:40px;
     margin: 5%;
-    vertical-align: middle
+    vertical-align: middle;
+    text-shadow: 1px 1px 1px #def;
 }
 
 #scrollbar {

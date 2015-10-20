@@ -143,8 +143,10 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
         var i = iconMap.get(e.target);
         if (i) i.launch();
         else {
-            //console.log(e.explicitOriginalTarget.data);
-
+            /*
+            console.log(e);
+            console.log(e.explicitOriginalTarget.data);
+            */
 
             if (e.target.id == "btn_config__cancel") {
                 app_status("block", "none");
@@ -171,7 +173,7 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
             }
 
             // scrollbar
-            if (undefined != e.explicitOriginalTarget.data) {
+            if ( e.explicitOriginalTarget.data != undefined ) {
                 if ( $('#' +e.explicitOriginalTarget.data).offset().top ) {
                     var letter_offset = $('#' +e.explicitOriginalTarget.data).offset().top;
 
