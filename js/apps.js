@@ -57,7 +57,7 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
         letter.setAttribute("name", l);
         parent.append(letter);
         if (config.empty_letters) {
-            letter.style.display = "none";
+            letter.style.display="none";
         }
     }
 
@@ -72,16 +72,16 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
         //document.getElementById(firstchar).innerHTML = ""; //FIXME
 
 
+
         var tile = document.createElement('div');
         tile.className = 'tile';
         tile.className += ' icon_' + wordname[0];
         tile.style.background = 'url(' + icon.icon + ') center/' + config.columns[x] + '% no-repeat';
         tile.style.width = (2 == x) ? "125px" : "95px";
 
-
-        $('#' + firstchar).append(tile);
+        if (_.isEmpty($('.'+ 'icon_' + wordname[0])))  $('#' + firstchar).append(tile);
         if (config.empty_letters) {
-            $('#' + firstchar).css('display', "block");
+            $('#' + firstchar).show();
         }
         iconMap.set(tile, icon);
     }
@@ -89,8 +89,9 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
     /* fires up the painting */
     var start = function() {
 
-            parent.innerHTML = "";
             $('.tile').remove();
+            $('.letter').remove();
+            $('#settings').remove();
 
             var skull = document.createElement('span');
             skull.id = "settings";
