@@ -2,7 +2,7 @@
  * Alphascreen
  * (c) leandro@leandro.org
  * GPL v3 license
- * v. 20151019
+ * v. 20151020
  */
 requirejs.config({
     appDir: ".",
@@ -11,7 +11,7 @@ requirejs.config({
         'Zepto': ['zepto.min'],
         'underscore': ['underscore-min']
     },
-    shim: { //TODO: underscore es innecesario
+    shim: {
         'underscore': {
             exports: '_',
             deps: ['Zepto']
@@ -69,10 +69,8 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
         var name = icon.app.manifest.name;
         var wordname = name.split(" ");
         var firstchar = name.charAt(0);
-        //document.getElementById(firstchar).innerHTML = ""; //FIXME
 
-
-
+        /* tile generation*/
         var tile = document.createElement('div');
         tile.className = 'tile';
         tile.className += ' icon_' + wordname[0];
@@ -84,18 +82,20 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
             $('#' + firstchar).show(); //FIXME zepto show() is very slow :(
         }
         iconMap.set(tile, icon);
+        /* end tile generation*/
     }
 
     /* fires up the painting */
     var start = function() {
 
+            //clean up to redraw
             $('.tile').remove();
             $('.letter').remove();
-            $('#settings').remove();
+            // end clean up
 
-            for (z = 65; z < 91; z++) {
-                var l = String.fromCharCode(z);
-                print_letter(l);
+            // draw section letters
+            for (z = 65; z < 91; z++) { // old reliable for loop :)
+                print_letter( String.fromCharCode(z) );
             }
 
             /**
@@ -136,7 +136,6 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
                 document.getElementById('btn_config__icons_2_columns').disabled = false;
                 document.getElementById('btn_config__icons_3_columns').disabled = true;
             }
-
             // end options buttons
 
             app_status("block", "none");
@@ -156,6 +155,8 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
             console.log(e.explicitOriginalTarget.data);
             */
 
+
+            //TO-DO: a switch here, plz
             if (e.target.id == "btn_config__cancel") {
                 app_status("block", "none");
             }
@@ -206,12 +207,15 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
         }
     }); //end window event 'click'
 
+
     //settings longpress event
     window.addEventListener('contextmenu', function(){
         app_status("none", "block");
-    }, true); //end settings event 'longpress'
+    }, true);
+    //end settings event 'longpress'
 
 
+    // 3, 2, 1 ...
     start();
 
 });
