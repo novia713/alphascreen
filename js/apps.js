@@ -2,7 +2,7 @@
  * Alphascreen
  * (c) leandro@leandro.org
  * GPL v3 license
- * v. 20151020
+ * v. 20151021
  */
 requirejs.config({
     appDir: ".",
@@ -103,7 +103,6 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
 
     /* fires up the painting */
     var start = function() {
-
             background = config.color_theme[config.selected_theme];
 
 
@@ -120,7 +119,6 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
             /**
              * Fetch all apps and render them.
              */
-
             FxosApps.all().then(icons => {
                 icons.forEach(render);
 
@@ -279,13 +277,14 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
 
     window.addEventListener ("scroll", function() {
         if ((window.innerHeight + window.scrollY) < document.body.scrollHeight) { //avoid infinite scroll
-            $('#scrollbar').css('marginTop',  $(window).scrollTop());
+            var adjust_scroll = function() {
+                $('#scrollbar').css('marginTop',  $(window).scrollTop());
+            }
+            setTimeout(adjust_scroll, 1000);
         }
     });
 
-
     // 3, 2, 1 ...
-    console.log(config.color_tile);
     start();
 
 });

@@ -19,8 +19,12 @@
   },
   "default_locale": "en-US",
   "icons": {
-    "128": "/style/icons/alpha.png",
-    "30": "/style/icons/alpha30.png"
+    "128":   "/style/icons/alpha.png",
+    "60":  "/style/icons/alpha60.png",
+    "48":  "/style/icons/alpha48.png",
+    "32":  "/style/icons/alpha32.png",
+    "30":  "/style/icons/alpha30.png",
+    "16":  "/style/icons/alpha16.png"
   },
   "orientation": "portrait-primary",
   "activities": {},
