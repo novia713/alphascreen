@@ -36,6 +36,7 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
     config.columns = [];
     config.columns[2] = 65;
     config.columns[3] = 35;
+    config.color_tile = null;
 
 
     /* END CONFIG */
@@ -74,8 +75,10 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
         var tile = document.createElement('div');
         tile.className = 'tile';
         tile.className += ' icon_' + wordname[0];
-        tile.style.background = 'url(' + icon.icon + ') center/' + config.columns[x] + '% no-repeat';
-        tile.style.width = (2 == x) ? "125px" : "95px";
+        var str_tile = (config.color_tile)? ", #f8b3f8": "";
+        tile.style.background = 'url(' + icon.icon + ') center/' + config.columns[x] + '% no-repeat' + str_tile;
+        tile.style.width = (2 == x) ? "108px" : "75px";
+        if (3 == x) tile.style.height = "75px";
 
         if (_.isEmpty($('.'+ 'icon_' + wordname[0])))  $('#' + firstchar).append(tile);
         if (config.empty_letters) {
@@ -116,6 +119,15 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
             if (bg == false) {
                 document.getElementById('btn_config__bg_transparent').disabled = true;
                 document.getElementById('btn_config__bg_colored').disabled = false;
+            }btn_config__tile_transparent
+
+            if (config.color_tile) {
+                document.getElementById('btn_config__tile_transparent').disabled = false;
+                document.getElementById('btn_config__tile_colored').disabled = true;
+            }
+            if (!config.color_tile) {
+                document.getElementById('btn_config__tile_transparent').disabled = true;
+                document.getElementById('btn_config__tile_colored').disabled = false;
             }
 
             if (config.empty_letters == true) {
@@ -174,6 +186,16 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
                 start();
             }// end background
 
+            if (e.target.id == "btn_config__tile_transparent") {
+                config.color_tile = null;
+                start();
+            }
+
+            if (e.target.id == "btn_config__tile_colored") {
+                config.color_tile = "#f8b3f8";
+                start();
+            }
+
 
             if (e.target.id == "btn_config__hide_empty_letters") {
                 config.empty_letters = true;
@@ -198,9 +220,10 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
             // scrollbar
             if ( e.explicitOriginalTarget.data != undefined ) {
                 if ( $('#' +e.explicitOriginalTarget.data).offset().top ) {
-                    var letter_offset = $('#' +e.explicitOriginalTarget.data).offset().top;
 
+                    var letter_offset = $('#' +e.explicitOriginalTarget.data).offset().top;
                     $('#scrollbar').css('marginTop', letter_offset);
+
                 }
 
             }
@@ -210,7 +233,7 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
 
     //settings longpress event
     window.addEventListener('contextmenu', function(){
-        //TODO: hide/show disabled buttons
+        // hide/show disabled buttons in settings
         _.map($('button'), function(b){
             if (b.disabled) b.style.display="none";
             else b.style.display="block";
@@ -222,6 +245,7 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
 
 
     // 3, 2, 1 ...
+    console.log(config.color_tile);
     start();
 
 });

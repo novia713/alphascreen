@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
+  <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+                            A L P H A S C R E E N
+
+                          homescreens for everyone
+
+                        mail me: leandro@leandro.org
+
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <head>
     <meta charset="utf-8">
     <title>FirefoxOS Homescreen Boilerplate</title>
@@ -10,6 +18,7 @@
     <link rel="stylesheet" href="style/css/scrolling.css">
     <link href="/style/css/action_menu.css" rel="stylesheet" type="text/css">
     <link href="/style/css/switches.css" rel="stylesheet" type="text/css">
+    <link href="/style/css/buttons.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="bower_components/gaia-fonts/style.css"></link>
     <script defer src="bower_components/firefoxos-mozapps/dist/build.standard.js"></script>
     <!-- https://libraries.io/npm/fxos-lib-mozapps -->
@@ -84,10 +93,12 @@
 
 
     <form role="dialog" data-type="action" id="menu_settings">
-
+      <header id="options-title"> Alphascreen Options </header>
       <menu>
-        <button id="btn_config__bg_transparent" type="button">Transparent Bg</button>
-        <button disabled id="btn_config__bg_colored" type="button">Colored Background</button>
+        <button id="btn_config__bg_transparent" type="button">Transparent bg</button>
+        <button disabled id="btn_config__bg_colored" type="button">Colored background</button>
+        <button disabled id="btn_config__tile_transparent" type="button">Transparent tiles</button>
+        <button id="btn_config__tile_colored" type="button">Colored tiles</button>
         <button id="btn_config__show_empty_letters" type="button">Show empty letters</button>
         <button id="btn_config__hide_empty_letters" type="button">Hide empty letters</button>
         <button id="btn_config__icons_2_columns" type="button">Big icons</button>
