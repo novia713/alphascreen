@@ -45,7 +45,7 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
     // theme colors
     config.color_theme = [];
     config.color_theme['violet']= "-moz-linear-gradient(-45deg, violet, navy);";
-    config.color_theme['green'] = "-moz-linear-gradient(-45deg, #2D882D, #116611);";
+    config.color_theme['green'] = "-moz-linear-gradient(-45deg, green, #116611);";
     config.selected_theme = 'violet';
 
 
@@ -278,7 +278,9 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
 
 
     window.addEventListener ("scroll", function() {
-        $('#scrollbar').css('marginTop',  $(window).scrollTop());
+        if ((window.innerHeight + window.scrollY) < document.body.scrollHeight) { //avoid infinite scroll
+            $('#scrollbar').css('marginTop',  $(window).scrollTop());
+        }
     });
 
 
