@@ -36,7 +36,19 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
     config.columns = [];
     config.columns[2] = 65;
     config.columns[3] = 35;
+    // color tiles
     config.color_tile = null;
+    config.pink_tile_bg  = "#f8b3f8";
+    config.green_tile_bg = "#55AA55";
+    config.big_tile_width = "108px";
+    config.small_tile_width = "75px";
+    // theme colors
+    config.color_theme = [];
+    config.color_theme['violet']= "-moz-linear-gradient(-45deg, violet, navy);";
+    config.color_theme['green'] = "-moz-linear-gradient(-45deg, #2D882D, #116611);";
+    config.selected_theme = 'violet';
+
+
 
 
     /* END CONFIG */
@@ -70,15 +82,16 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
         var name = icon.app.manifest.name;
         var wordname = name.split(" ");
         var firstchar = name.charAt(0);
+        var tile_bg = ('violet' == config.selected_theme)? config.pink_tile_bg : config.green_tile_bg;
 
         /* tile generation*/
         var tile = document.createElement('div');
         tile.className = 'tile';
         tile.className += ' icon_' + wordname[0];
-        var str_tile = (config.color_tile)? ", #f8b3f8": "";
+        var str_tile = (config.color_tile)? ", "+ tile_bg : "";
         tile.style.background = 'url(' + icon.icon + ') center/' + config.columns[x] + '% no-repeat' + str_tile;
-        tile.style.width = (2 == x) ? "108px" : "75px";
-        if (3 == x) tile.style.height = "75px";
+        tile.style.width = (2 == x) ? config.big_tile_width : config.small_tile_width;
+        if (3 == x) tile.style.height = config.small_tile_width;
 
         if (_.isEmpty($('.'+ 'icon_' + wordname[0])))  $('#' + firstchar).append(tile);
         if (config.empty_letters) {
@@ -90,6 +103,9 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
 
     /* fires up the painting */
     var start = function() {
+
+            background = config.color_theme[config.selected_theme];
+
 
             //clean up to redraw
             $('.tile').remove();
@@ -119,7 +135,17 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
             if (bg == false) {
                 document.getElementById('btn_config__bg_transparent').disabled = true;
                 document.getElementById('btn_config__bg_colored').disabled = false;
-            }btn_config__tile_transparent
+            }
+
+            //theme
+            if (config.selected_theme == "green") {
+                document.getElementById('btn_config__green_theme').disabled = true;
+                document.getElementById('btn_config__violet_theme').disabled = false;
+            }
+            if (config.selected_theme == "violet") {
+                document.getElementById('btn_config__green_theme').disabled = false;
+                document.getElementById('btn_config__violet_theme').disabled = true;
+            } //end theme
 
             if (config.color_tile) {
                 document.getElementById('btn_config__tile_transparent').disabled = false;
@@ -169,23 +195,39 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
 
 
             //TO-DO: a switch here, plz
+
+            //cancel
             if (e.target.id == "btn_config__cancel") {
                 app_status("block", "none");
             }
 
+            //theme
+            if (e.target.id == "btn_config__green_theme") {
+                config.selected_theme = "green";
+                parent.css('background', config.color_theme[config.selected_theme]);
+                start();
+            }
+
+            if (e.target.id == "btn_config__violet_theme") {
+                config.selected_theme = "violet";
+                parent.css('background', config.color_theme[config.selected_theme]);
+                start();
+            }
+
             // background
             if (e.target.id == "btn_config__bg_transparent") {
-                parent.css('background','none');
+                parent.css('background', 'none');
                 bg = false;
                 start();
             }
 
             if (e.target.id == "btn_config__bg_colored") {
-                parent.css('background','-moz-linear-gradient(-45deg, violet,navy)');
+                parent.css('background', config.color_theme[config.selected_theme]);
                 bg = true;
                 start();
             }// end background
 
+            //tiles
             if (e.target.id == "btn_config__tile_transparent") {
                 config.color_tile = null;
                 start();
@@ -196,7 +238,7 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
                 start();
             }
 
-
+            //letters
             if (e.target.id == "btn_config__hide_empty_letters") {
                 config.empty_letters = true;
                 start();
@@ -207,6 +249,7 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
                 start();
             }
 
+            //columns
             if (e.target.id == "btn_config__icons_2_columns") {
                 x = 2;
                 start();
