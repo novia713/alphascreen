@@ -18,8 +18,8 @@ body {margin: 0;}
 .tile {
     display: inline-block;
     height: 108px;
-    padding: 3px;
-    margin: 3px;
+    padding: 12px;
+    margin: 12px;
     border-radius: 4%;
 }
 
