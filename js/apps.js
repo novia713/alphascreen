@@ -260,16 +260,6 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
                 start();
             }
 
-            // scrollbar
-            if ( e.explicitOriginalTarget.data != undefined ) {
-                if ( $('#' +e.explicitOriginalTarget.data).offset().top ) {
-
-                    var letter_offset = $('#' +e.explicitOriginalTarget.data).offset().top;
-                    $('#scrollbar').css('marginTop', letter_offset);
-
-                }
-
-            }
         }
     }); //end window event 'click'
 
@@ -285,6 +275,11 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
         app_status("none", "block");
     }, true);
     //end settings event 'longpress'
+
+
+    window.addEventListener ("scroll", function() {
+        $('#scrollbar').css('marginTop',  $(window).scrollTop());
+    });
 
 
     // 3, 2, 1 ...
