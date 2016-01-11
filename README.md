@@ -14,10 +14,14 @@ Alphascreen is an alphabetic homescreen for FirefoxOS
     
 # TO-DO
  - install / uninstall
- - set visible the scrollbar at any level of scroll of the screen. now it works so so ... pull request are welcome :)
+
+
+
+pull request are welcome :bowtie:
  
 
 ![alphascreen](http://i.imgur.com/tSLmydHl.jpg)
 ![alphascreen](http://i.imgur.com/CHP5AHy.png)
+![alphascreen](http://blog.leandro.vc/sites/default/files/IMG_20151022_113926.jpg)
 
 
