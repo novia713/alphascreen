@@ -1,9 +1,42 @@
-/*
+/**
+ *          .·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.
+ *          .·' H O M E S C R E E N S F O R A L L'·.  by leandro713
+ *          .·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.
+ *
  * Alphascreen
  * (c) leandro@leandro.org
  * GPL v3 license
- * v. 20151021
+ * v. 20160111
+ *
+ * @author      leandro713 <leandro@leandro.org>
+ * @copyright   leandro713 - 2016
+ * @link        https://github.com/novia713/alphascreen
+ * @license     http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version     1.1
+ * @date        20160111
+ *
+ * @see         https://github.com/mozilla-b2g/gaia/tree/88c8d6b7c6ab65505c4a221b61c91804bbabf891/apps/homescreen
+ * @thanks      to @CodingFree for his tireless support and benevolent friendship
+ *
+ *
  */
+
+/*
+ * HOW TO DO HOMESCREENS MAGIC WITH FXOS 2.6
+ * =========================================
+ * 1, manifest.webapp →
+ *      "type":"privileged",
+ *      "permission": "homescreen-webapps-manage"
+ *
+ * 2. navigator.mozApps.mgmt.getAll()               // gets all the apps installed on the phone
+ *
+ * 3. navigator.mozApps.mgmt.getIcon(app, size)     // gets the icon of the app at the desired (more or less) size
+ *
+ * 4. window.URL.createObjectURL( img )             // userful for printin' the blob resulting of getIcon()
+ *
+ *
+ **/
+
 requirejs.config({
     appDir: ".",
     baseUrl: "js",
@@ -20,6 +53,12 @@ requirejs.config({
 });
 
 require(["Zepto", 'underscore'], function(Zepto, _) {
+
+    const apps_2_exclude = [
+        "Downloads", "EmergencyCall", "System", "Legacy", "Ringtones",
+        "Legacy Home Screen", "Wallpaper", "Default Theme",
+        "Built-in Keyboard", "Bluetooth Manager", "Communications",
+        "PDF Viewer", "Network Alerts", "WAP Push manager", "Default Home Screen" ];
 
     // basic vars
     var parent = $('#apps');
@@ -75,30 +114,57 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
     }
 
     /**
+     * Prints set up message
+     */
+     var print_msg = function () {
+        var txt_msg  = "<div style='background-color:orange;color:white'><h3>Please, set this homescreen your default homescreen in <i>Settings / Homescreens / Change Homescreens</i>. This homescreen won't work if you don't do so</h3></div>";
+            txt_msg += "<div style='background-color:orange;color:black'><h3>Ve a <i>Configuración / Homescreens</i> y haz este homescreen tu homescreen por defecto. Si no lo haces, este homescreen no funciona!</h3></div>";
+        parent.html(txt_msg);
+     };
+
+    /**
      * Renders the icon to the container.
      */
     var render = function(icon) {
 
-        var name = icon.app.manifest.name;
-        var wordname = name.split(" ");
-        var firstchar = name.charAt(0);
-        var tile_bg = ('violet' == config.selected_theme)? config.pink_tile_bg : config.green_tile_bg;
+        if (!icon.manifest.icons) return;
 
-        /* tile generation*/
-        var tile = document.createElement('div');
-        tile.className = 'tile';
-        tile.className += ' icon_' + wordname[0];
-        var str_tile = (config.color_tile)? ", "+ tile_bg : "";
-        tile.style.background = 'url(' + icon.icon + ') center/' + config.columns[x] + '% no-repeat' + str_tile;
-        tile.style.width = (2 == x) ? config.big_tile_width : config.small_tile_width;
-        if (3 == x) tile.style.height = config.small_tile_width;
+            // guards
+            if( _.contains ( apps_2_exclude, icon.manifest.name ))  return;
+            if (icon.manifest.role == "homescreen")                 return;
+            if (icon.manifest.role == "addon")                      return;
+            //end guards
 
-        if (_.isEmpty($('.'+ 'icon_' + wordname[0])))  $('#' + firstchar).append(tile);
-        if (config.empty_letters) {
-            $('#' + firstchar).show(); //FIXME zepto show() is very slow :(
-        }
-        iconMap.set(tile, icon);
-        /* end tile generation*/
+            var icon_image = navigator.mozApps.mgmt.getIcon(icon, 60);
+
+
+            icon_image.then ( function ( img ) {
+
+                var name = icon.manifest.name;console.log(name);
+                var wordname = name.split(" ");
+                var firstchar = name.charAt(0);
+                var tile_bg = ('violet' == config.selected_theme)? config.pink_tile_bg : config.green_tile_bg;
+
+                /* tile generation*/
+                var tile = document.createElement('div');
+                tile.className = 'tile';
+                tile.className += ' icon_' + wordname[0];
+                var str_tile = (config.color_tile)? ", "+ tile_bg : "";
+                tile.style.background = 'url(' + window.URL.createObjectURL( img )+ ') center/' + config.columns[x] + '% no-repeat' + str_tile;
+                tile.style.background = tile.style.background.replace(/&quot;/g,'"');
+                tile.style.width = (2 == x) ? config.big_tile_width : config.small_tile_width;
+                if (3 == x) tile.style.height = config.small_tile_width;
+
+                if (_.isEmpty($('.'+ 'icon_' + wordname[0])))  $('#' + firstchar).append(tile);
+                if (config.empty_letters) {
+                    $('#' + firstchar).show(); //FIXME zepto show() is very slow :(
+                }
+                iconMap.set(tile, icon);
+                /* end tile generation*/
+            });
+
+            if (typeof icon_image == undefined) return;
+
     }
 
     /* fires up the painting */
@@ -119,10 +185,28 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
             /**
              * Fetch all apps and render them.
              */
-            FxosApps.all().then(icons => {
-                icons.forEach(render);
+            var myApps = new Promise((resolve, reject) => {
+                    var request = navigator.mozApps.mgmt.getAll();
 
+                    request.onsuccess = (e) => {
+                      for (var app of request.result) {
+                        render( app );
+                      }
+                    };
+
+                    request.onerror = (e) => {
+                      console.error('Error calling getAll: ' + request.error.name);
+                      resolve();
+                    };
             });
+
+            myApps.then(
+                function (v) {
+
+                }, function(v){
+                    print_msg();
+                }
+            );
 
 
             //options buttons
