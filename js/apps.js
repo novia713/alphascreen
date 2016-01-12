@@ -52,11 +52,11 @@ requirejs.config({
     }
 });
 
-require(["Zepto", 'underscore'], function(Zepto, _) {
+require(["Zepto", 'underscore'], (Zepto, _) => {
 
     const apps_2_exclude = [
         "Downloads", "EmergencyCall", "System", "Legacy", "Ringtones",
-        "Legacy Home Screen", "Wallpaper", "Default Theme",
+        "Legacy Home Screen", "Wallpaper", "Default Theme", "Purchased Media",
         "Built-in Keyboard", "Bluetooth Manager", "Communications",
         "PDF Viewer", "Network Alerts", "WAP Push manager", "Default Home Screen" ];
 
@@ -92,7 +92,7 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
 
     /* END CONFIG */
 
-    var app_status = function(state_apps, state_settings) {
+    var app_status = (state_apps, state_settings) => {
         parent.css('display', state_apps);
         settings.css('display', state_settings);
     }
@@ -101,7 +101,7 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
     /**
      * Letters section generator
      */
-    var print_letter = function(l) {
+    var print_letter = l => {
         var letter = document.createElement('div');
         letter.className = 'letter';
         letter.id = l;
@@ -116,7 +116,7 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
     /**
      * Prints set up message
      */
-     var print_msg = function () {
+     var print_msg = () => {
         var txt_msg  = "<div style='background-color:orange;color:white'><h3>Please, set this homescreen your default homescreen in <i>Settings / Homescreens / Change Homescreens</i>. This homescreen won't work if you don't do so</h3></div>";
             txt_msg += "<div style='background-color:orange;color:black'><h3>Ve a <i>Configuración / Homescreens</i> y haz este homescreen tu homescreen por defecto. Si no lo haces, este homescreen no funciona!</h3></div>";
         parent.html(txt_msg);
@@ -125,7 +125,7 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
     /**
      * Renders the icon to the container.
      */
-    var render = function(icon) {
+    var render = icon => {
 
         if (!icon.manifest.icons) return;
 
@@ -138,7 +138,7 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
             var icon_image = navigator.mozApps.mgmt.getIcon(icon, 60);
 
 
-            icon_image.then ( function ( img ) {
+            icon_image.then ( img => {
 
                 var name = icon.manifest.name;console.log(name);
                 var wordname = name.split(" ");
@@ -168,7 +168,7 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
     }
 
     /* fires up the painting */
-    var start = function() {
+    var start = () => {
             background = config.color_theme[config.selected_theme];
 
 
@@ -200,10 +200,9 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
                     };
             });
 
-            myApps.then(
-                function (v) {
+            myApps.then( v => {
 
-                }, function(v){
+                }, v => {
                     print_msg();
                 }
             );
@@ -347,11 +346,13 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
 
 
     //settings longpress event
-    window.addEventListener('contextmenu', function(){
+    window.addEventListener('contextmenu', () => {
         // hide/show disabled buttons in settings
-        _.map($('button'), function(b){
-            if (b.disabled) b.style.display="none";
-            else b.style.display="block";
+        _.map($('button'), b => {
+            if (b.disabled)
+                b.style.display="none";
+            else
+                b.style.display="block";
         });
 
         app_status("none", "block");
@@ -359,11 +360,13 @@ require(["Zepto", 'underscore'], function(Zepto, _) {
     //end settings event 'longpress'
 
 
-    window.addEventListener ("scroll", function() {
+    window.addEventListener ("scroll", () => {
         if ((window.innerHeight + window.scrollY) < document.body.scrollHeight) { //avoid infinite scroll
-            var adjust_scroll = function() {
+
+            var adjust_scroll = () => {
                 $('#scrollbar').css('marginTop',  $(window).scrollTop());
             }
+
             setTimeout(adjust_scroll, 1000);
         }
     });
