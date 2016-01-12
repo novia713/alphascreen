@@ -178,7 +178,7 @@ require(["Zepto", 'underscore'], (Zepto, _) => {
             // end clean up
 
             // draw section letters
-            for (z = 65; z < 91; z++) { // old reliable for loop :)
+            for (z = 65; z < 91; z++) { // old reliable «for» loop :)
                 print_letter( String.fromCharCode(z) );
             }
 
@@ -266,8 +266,10 @@ require(["Zepto", 'underscore'], (Zepto, _) => {
      * Add an event listener to launch the app on click.
      */
     window.addEventListener('click', e => {
+
         var i = iconMap.get(e.target);
         if (i) i.launch();
+
         else {
             /*
             console.log(e);
@@ -347,6 +349,7 @@ require(["Zepto", 'underscore'], (Zepto, _) => {
 
     //settings longpress event
     window.addEventListener('contextmenu', () => {
+
         // hide/show disabled buttons in settings
         _.map($('button'), b => {
             if (b.disabled)
@@ -361,6 +364,7 @@ require(["Zepto", 'underscore'], (Zepto, _) => {
 
 
     window.addEventListener ("scroll", () => {
+
         if ((window.innerHeight + window.scrollY) < document.body.scrollHeight) { //avoid infinite scroll
 
             var adjust_scroll = () => {
