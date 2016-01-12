@@ -135,7 +135,7 @@ require(["Zepto", 'underscore'], (Zepto, _) => {
             if (icon.manifest.role == "addon")                      return;
             //end guards
 
-            var icon_image = navigator.mozApps.mgmt.getIcon(icon, 60);
+            var icon_image = navigator.mozApps.mgmt.getIcon(icon, 80);
 
 
             icon_image.then ( img => {
