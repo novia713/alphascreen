@@ -6,14 +6,14 @@
  * Alphascreen
  * (c) leandro@leandro.org
  * GPL v3 license
- * v. 20160111
+ * v. 2016020
  *
  * @author      leandro713 <leandro@leandro.org>
  * @copyright   leandro713 - 2016
  * @link        https://github.com/novia713/alphascreen
  * @license     http://www.gnu.org/licenses/gpl-3.0.en.html
- * @version     1.1
- * @date        20160111
+ * @version     1.11
+ * @date        20160120
  *
  * @see         https://github.com/mozilla-b2g/gaia/tree/88c8d6b7c6ab65505c4a221b61c91804bbabf891/apps/homescreen
  * @thanks      to @CodingFree for his tireless support and benevolent friendship
@@ -45,6 +45,9 @@ requirejs.config({
         'underscore': ['underscore-min']
     },
     shim: {
+        Zepto: {
+          exports: '$'
+        },
         'underscore': {
             exports: '_',
             deps: ['Zepto']
@@ -140,7 +143,7 @@ require(["Zepto", 'underscore'], (Zepto, _) => {
 
             icon_image.then ( img => {
 
-                var name = icon.manifest.name;console.log(name);
+                var name = icon.manifest.name;
                 var wordname = name.split(" ");
                 var firstchar = name.charAt(0);
                 var tile_bg = ('violet' == config.selected_theme)? config.pink_tile_bg : config.green_tile_bg;
